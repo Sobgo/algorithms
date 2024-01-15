@@ -61,8 +61,10 @@ int main() {
 	while(cin >> n >> m) {
 		if (n == 0 && m == 0) break;
 
+		if (t != 1) cout << '\n';
+
 		if (m == 0) {
-			cout << "Calling circles for data set " << t++ << ":\n\n";
+			cout << "Calling circles for data set " << t++ << ":\n";
 			continue;
 		}
 
@@ -99,8 +101,6 @@ int main() {
 			}
 			if (components[i].size() != 0) cout << '\n';
 		}
-
-		cout << '\n';
 	}
 
 	return 0;
