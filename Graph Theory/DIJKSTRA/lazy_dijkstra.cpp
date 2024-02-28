@@ -4,47 +4,41 @@
 #include <algorithm>
 using namespace std;
 
+typedef pair <int, int> pi;
+typedef vector <int> vi;
+typedef vector <pi> vp;
+typedef vector <vp> vvp;
+
+#define to first
+#define w second
+
 #define INF 2147483647
 
-#define weight first
-#define to second
-
 int N, M;
-// adjacency list (weight, node) pairs
-vector < vector < pair <int, int> > > ADJ; 
+vvp ADJ; 
 
-// returns the distance from start to all other nodes
-// and the parent array (previous node in path from each node)
-pair < vector <int>, vector <int> > dijkstra(int start) {
-	// priority queue of pairs (distance, node)
-	// where distance is total weight of path used to reach node
-	priority_queue < pair <int, int> > pq;
-
-	// distance from start to all other nodes, initially INF,
-	// during algorithm will store current best distance
+pair <vi, vi> dijkstra(int start) {
+	priority_queue < pi, vp, greater<pi> > pq;
 	vector <int> dist(N, INF);
-
-	// for path reconstruction
 	vector <int> parent(N, -1);
 
-	// set start as initial node
 	dist[start] = 0;
 	pq.push({0, start});
 
 	while (!pq.empty()) {
-		pair <int, int> cur = pq.top();
+		int weight = pq.top().first;
+		int node = pq.top().second;
 		pq.pop();
 
 		// if we already found a better path to this node ignore it
-		if (dist[cur.to] < cur.weight) continue;
+		if (dist[node] < weight) continue;
 
 		// update distances to all nodes that this path improves distance to
-		for (pair <int, int> next : ADJ[cur.to]) {	
-			if (dist[next.to] > dist[cur.to] + next.weight) {
-				dist[next.to] = dist[cur.to] + next.weight;
-				
+		for (pi next : ADJ[node]) {	
+			if (dist[next.to] > dist[node] + next.w) {
+				dist[next.to] = dist[node] + next.w;
 				pq.push({dist[next.to], next.to});
-				parent[next.to] = cur.to;
+				parent[next.to] = node;
 			}
 		}
 	}
@@ -52,17 +46,16 @@ pair < vector <int>, vector <int> > dijkstra(int start) {
 	return {dist, parent};
 }
 
-// finds shortest path from start to end
 vector <int> path(int start, int end) {
-	pair < vector <int>, vector <int> > res = dijkstra(start);
-	vector <int> dist = res.first;
-	vector <int> parent = res.second;
+	pair <vi, vi> res = dijkstra(start);
+	vi dist = res.first;
+	vi parent = res.second;
 
 	// no path
 	if(dist[end] == INF) return vector <int>();
 
 	// reconstruct path from end to start
-	vector <int> path;
+	vi path;
 	for (int at = end; at != -1; at = parent[at]) {
 		path.push_back(at);
 	}
@@ -79,22 +72,19 @@ int main() {
 
 	// N = number of nodes, M = number of edges
 	cin >> N >> M;
+	ADJ = vvp(N);
 
-	// read adjacency list
-	ADJ.resize(N);
-
-	int a, b, w;
+	int a, b, weight;
 	for (int i = 0; i < M; ++i) {
-		cin >> a >> b >> w;
-		ADJ[a].push_back({w, b});
-		//ADJ[b].push_back({w, a});
+		cin >> a >> b >> weight;
+		ADJ[a].push_back({b, weight});
+		//ADJ[b].push_back({a, weight});
 	}
 
-	// find shortest path from start to end
 	int start, end;
 	cin >> start >> end;
 	
-	vector <int> res = path(start, end);
+	vi res = path(start, end);
 
 	if (res.empty()) {
 		cout << "No path\n";
