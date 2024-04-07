@@ -72,9 +72,7 @@ int main() {
 		}
 
 		cout << total << "\n";
-
-		if (i != t - 1)
-			cout << "\n";
+		if (i != t - 1) cout << "\n";
 	}
 
 	return 0;

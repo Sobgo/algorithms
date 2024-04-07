@@ -1,17 +1,22 @@
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 class Team {
-	public:
+  public:
 	string name;
 	int points, wins, ties, losses, goals_scored, goals_against;
-	
+
 	Team(string name) {
 		this->name = name;
-		points = 0; wins = 0; ties = 0; losses = 0; goals_scored = 0; goals_against = 0;
+		points = 0;
+		wins = 0;
+		ties = 0;
+		losses = 0;
+		goals_scored = 0;
+		goals_against = 0;
 	}
 
 	void add_match(int goals_scored, int goals_against) {
@@ -39,22 +44,25 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	string buff; getline(cin, buff); 
+	string buff;
+	getline(cin, buff);
 	int n = stoi(buff);
 
 	for (int i = 0; i < n; ++i) {
-		string tournament_name; getline(cin, tournament_name);
-		
-		getline(cin, buff); 
+		string tournament_name;
+		getline(cin, tournament_name);
+
+		getline(cin, buff);
 		int t = stoi(buff);
 
-		map <string, int> teams;
-		vector <Team> v;
+		map<string, int> teams;
+		vector<Team> v;
 
 		int iter = 0;
 
 		for (int j = 0; j < t; ++j) {
-			string team_name; getline(cin, team_name);
+			string team_name;
+			getline(cin, team_name);
 			teams[team_name] = iter++;
 			v.push_back(Team(team_name));
 		}
@@ -65,7 +73,7 @@ int main() {
 		string team1, team2;
 		int goals1, goals2;
 
-		for (int j = 0; j < g; ++j) {	
+		for (int j = 0; j < g; ++j) {
 			getline(cin, team1, '#');
 
 			getline(cin, buff, '@');

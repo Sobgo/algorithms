@@ -1,16 +1,16 @@
 #include <iostream>
-#include <vector>
 #include <utility>
+#include <vector>
 using namespace std;
 
-typedef vector < vector <int> > vvi;
-typedef vector <int> vi;
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
 
-#define INF 2147483647/2
+#define INF 2147483647 / 2
 
 vvi ADJ;
 
-pair <vvi, vvi> floydwarshall() {
+pair<vvi, vvi> floydwarshall() {
 	vvi dist = ADJ;
 	vvi parents(ADJ.size(), vi(ADJ.size(), -1));
 
@@ -47,12 +47,12 @@ pair <vvi, vvi> floydwarshall() {
 		}
 	}
 
-	return { dist, parents };
+	return {dist, parents};
 }
 
 vi path(int start, int end) {
-	pair <vvi, vvi> fw = floydwarshall();
-	
+	pair<vvi, vvi> fw = floydwarshall();
+
 	vvi dist = fw.first;
 	vvi parents = fw.second;
 
@@ -89,7 +89,7 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int n, m; 
+	int n, m;
 	cin >> n >> m;
 
 	vvi dist = floydwarshall().first;
@@ -97,9 +97,12 @@ int main() {
 	cout << "Distances matrix:\n";
 	for (int i = 0; i < n; ++i) {
 		for (int j = 0; j < n; ++j) {
-			if (dist[i][j] == INF) cout << "INF ";
-			else if (dist[i][j] == -INF) cout << "-INF ";
-			else cout << dist[i][j] << " ";
+			if (dist[i][j] == INF)
+				cout << "INF ";
+			else if (dist[i][j] == -INF)
+				cout << "-INF ";
+			else
+				cout << dist[i][j] << " ";
 		}
 		cout << "\n\n";
 	}

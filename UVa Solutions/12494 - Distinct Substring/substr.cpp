@@ -1,20 +1,21 @@
 #include <iostream>
-#include <vector>
 #include <unordered_set>
+#include <vector>
 using namespace std;
 
 int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int t; cin >> t;
+	int t;
+	cin >> t;
 	string s;
 
-	for (int i = 0 ; i < t; ++i) {
-		cin >> s; 
-	
+	for (int i = 0; i < t; ++i) {
+		cin >> s;
+
 		string sub;
-		vector < unordered_set <string> > vs(201);
+		vector<unordered_set<string>> vs(201);
 		int total = 0;
 		bool add;
 

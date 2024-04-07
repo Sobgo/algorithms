@@ -1,6 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 int main() {
@@ -20,7 +20,7 @@ int main() {
 			continue;
 		}
 
-		vector <char> a(27, 0);
+		vector<char> a(27, 0);
 		string ans;
 		sort(s.begin(), s.end(), greater<char>());
 
@@ -37,7 +37,7 @@ int main() {
 				}
 			}
 
-			a[c -'a']++;
+			a[c - 'a']++;
 			prev = c;
 		}
 
@@ -51,7 +51,6 @@ int main() {
 
 		cout << ans << "\n";
 	}
-
 
 	return 0;
 }

@@ -1,9 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
 #include <random>
 #include <time.h>
+#include <vector>
 using namespace std;
 
 #define x first
@@ -13,22 +13,22 @@ using namespace std;
 const int MAX_TIME_SEC = 60 * 5;
 
 typedef long long int lli;
-typedef vector < pair <int, int> > vp;
-typedef vector <int> vi;
+typedef vector<pair<int, int>> vp;
+typedef vector<int> vi;
 
 int N;
 vp points;
 
-int EUC_2D_sq(pair <int, int> &a, pair <int, int> &b) {
-	return (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y);
+int EUC_2D_sq(pair<int, int> &a, pair<int, int> &b) {
+	return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 }
 
 lli path_len(vi &path) {
 	lli len = 0;
-	for (int i = 0; i < path.size()-1; ++i) {
-		len += (lli)(sqrt(EUC_2D_sq(points[path[i]], points[path[i+1]])) + 0.5);
+	for (int i = 0; i < path.size() - 1; ++i) {
+		len += (lli)(sqrt(EUC_2D_sq(points[path[i]], points[path[i + 1]])) + 0.5);
 	}
-	len += (lli)(sqrt(EUC_2D_sq(points[path[0]], points[path[path.size()-1]])) + 0.5);
+	len += (lli)(sqrt(EUC_2D_sq(points[path[0]], points[path[path.size() - 1]])) + 0.5);
 
 	return len;
 }
@@ -66,42 +66,42 @@ int main() {
 
 	vi path = nearest_neighbor();
 
-	int prev_time = -1, time = (double)clock()/CLOCKS_PER_SEC;
+	int prev_time = -1, time = (double)clock() / CLOCKS_PER_SEC;
 	lli len = path_len(path);
 
-	#if !TSPLIB
+#if !TSPLIB
 
 	cout << len << ", " << time << ": ";
 
 	for (int k = 0; k < N - 1; ++k) {
 		cout << path[k] << "->";
 	}
-	cout << path[N-1] << "\n";
+	cout << path[N - 1] << "\n";
 
-	#endif
+#endif
 
 	// step 2: improve path by local search
-	
+
 	if (time < MAX_TIME_SEC) {
 		bool improved = true;
-		int per = N/100;
+		int per = N / 100;
 		int passes = 0;
 
 		while (improved) {
 			improved = false;
 			++passes;
 
-			for (int i = 0; i < N-1; ++i) {
+			for (int i = 0; i < N - 1; ++i) {
 
 				prev_time = time;
-				time = (double)clock()/CLOCKS_PER_SEC;
+				time = (double)clock() / CLOCKS_PER_SEC;
 
-				#if TSPLIB
+#if TSPLIB
 
 				// clear console
 				cerr << "\033[2J\033[1;1H";
 
-				cerr << min(i/per, 100) << "% of search space explored (pass: " << passes << ")\n";
+				cerr << min(i / per, 100) << "% of search space explored (pass: " << passes << ")\n";
 				cerr << "Time elapsed: " << time << "s\n";
 				cerr << "Best so far: " << ((time != prev_time) ? (len = path_len(path)) : len) << "\n\n";
 
@@ -114,7 +114,7 @@ int main() {
 					break;
 				}
 
-				#else
+#else
 
 				// to prevent > GB output
 				if (i % 10000 == 0) {
@@ -123,12 +123,12 @@ int main() {
 					for (int k = 0; k < N - 1; ++k) {
 						cout << path[k] << "->";
 					}
-					cout << path[N-1] << "\n";
+					cout << path[N - 1] << "\n";
 				}
 
-				#endif
+#endif
 
-				for (int j = i+1; j < N; ++j) {
+				for (int j = i + 1; j < N; ++j) {
 					improved |= two_opt_swap(path, i, j);
 				}
 			}
@@ -137,7 +137,7 @@ int main() {
 
 	// step 3: print path
 
-	#if TSPLIB
+#if TSPLIB
 
 	len = path_len(path);
 	cerr << "Best tour found: " << len << "\n\n";
@@ -155,25 +155,25 @@ int main() {
 	cout << "-1\n";
 	cout << "EOF\n";
 
-	#else
+#else
 
-	time = (double)clock()/CLOCKS_PER_SEC;
+	time = (double)clock() / CLOCKS_PER_SEC;
 
 	cout << path_len(path) << ", " << time << ": ";
 
 	for (int k = 0; k < N - 1; ++k) {
 		cout << path[k] << "->";
 	}
-	cout << path[N-1] << "\n";
+	cout << path[N - 1] << "\n";
 
-	#endif
+#endif
 
 	return 0;
 }
 
 vi nearest_neighbor() {
 	vi path(N);
-	vector <bool> visited(N, false);
+	vector<bool> visited(N, false);
 
 	visited[0] = true;
 	path[0] = 0;
@@ -182,13 +182,13 @@ vi nearest_neighbor() {
 		int best = -1;
 		int best_dist = 1e9;
 
-		#if TSPLIB
+#if TSPLIB
 
-		int time = (double)clock()/CLOCKS_PER_SEC;
+		int time = (double)clock() / CLOCKS_PER_SEC;
 
 		// clear console
 		cerr << "\033[2J\033[1;1H";
-		
+
 		cerr << "Generating initial tour...\n";
 		cerr << "Time elapsed: " << time << "s\n";
 		cerr << "Progress: " << i << "/" << N << "\n\n";
@@ -199,11 +199,11 @@ vi nearest_neighbor() {
 			break;
 		}
 
-		#endif
+#endif
 
 		for (int j = 0; j < N; ++j) {
-			if (!visited[j] && EUC_2D_sq(points[path[i-1]], points[j]) < best_dist) {
-				best_dist = EUC_2D_sq(points[path[i-1]], points[j]);
+			if (!visited[j] && EUC_2D_sq(points[path[i - 1]], points[j]) < best_dist) {
+				best_dist = EUC_2D_sq(points[path[i - 1]], points[j]);
 				best = j;
 			}
 		}
@@ -223,10 +223,13 @@ vi nearest_neighbor() {
 }
 
 bool two_opt_swap(vi &path, int i, int j) {
+
+	// clang-format off
 	int delta = EUC_2D_sq(points[path[i]], points[path[j]])
 				+ EUC_2D_sq(points[path[(i+1) % N]], points[path[(j+1) % N]])
 				- EUC_2D_sq(points[path[i]], points[path[(i+1) % N]])
 				- EUC_2D_sq(points[path[j]], points[path[(j+1) % N]]);
+	// clang-format on
 
 	if (delta < 0) {
 		reverse(path.begin() + i + 1, path.begin() + j + 1);

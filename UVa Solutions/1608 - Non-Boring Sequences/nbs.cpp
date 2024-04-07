@@ -1,12 +1,12 @@
+#include <array>
 #include <iostream>
 #include <unordered_map>
-#include <array>
 using namespace std;
 
 typedef unsigned int uint;
 
-array <uint, 200002> V, L, R;
-unordered_map <uint, uint> M;
+array<uint, 200002> V, L, R;
+unordered_map<uint, uint> M;
 
 // checking order here is important
 bool eval(int s, int e) {
@@ -23,7 +23,8 @@ bool eval(int s, int e) {
 			return eval(s, r - 1) && eval(r + 1, e);
 		}
 
-		l++; r--;
+		l++;
+		r--;
 	}
 
 	return false;
@@ -43,7 +44,7 @@ int main() {
 		for (int i = 1; i <= n; ++i) {
 			cin >> V[i];
 			L[i] = 1;
-			R[i] = n +  1;
+			R[i] = n + 1;
 		}
 
 		for (int i = 1; i <= n; ++i) {

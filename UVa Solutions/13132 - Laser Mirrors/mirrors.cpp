@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-vector <int> phi;
+vector<int> phi;
 
 void precomp_phi(int range) {
 	phi.resize(range + 1);

@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vector>
-#include <utility>
 #include <queue>
+#include <utility>
+#include <vector>
 using namespace std;
 
 #define x first
@@ -10,13 +10,13 @@ using namespace std;
 #define make_t2i make_pair
 #define make_t3i make_pair
 
-typedef pair <int, int> t2i;
-typedef pair < pair <int, int>, int> t3i;
-typedef vector <t2i> vt2i;
+typedef pair<int, int> t2i;
+typedef pair<pair<int, int>, int> t3i;
+typedef vector<t2i> vt2i;
 
 const int B_SIZE = 8;
 
-vector < vector <vt2i> > adj(B_SIZE, vector <vt2i>(B_SIZE));
+vector<vector<vt2i>> adj(B_SIZE, vector<vt2i>(B_SIZE));
 
 int abs(int x) { return x < 0 ? -x : x; }
 
@@ -48,11 +48,11 @@ void populate_adj() {
 }
 
 int bfs(t2i s, t2i e) {
-	queue <t3i> q;
+	queue<t3i> q;
 	t2i node;
 	int depth;
 
-	vector < vector <bool> > visited(B_SIZE, vector <bool>(B_SIZE, false));
+	vector<vector<bool>> visited(B_SIZE, vector<bool>(B_SIZE, false));
 
 	q.push(make_t3i(s, 0));
 	visited[s.x][s.y] = true;

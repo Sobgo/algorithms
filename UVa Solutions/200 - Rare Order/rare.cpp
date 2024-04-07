@@ -1,13 +1,13 @@
 #include <iostream>
-#include <vector>
 #include <map>
 #include <set>
 #include <utility>
+#include <vector>
 using namespace std;
 
-typedef vector <bool> vb;
-typedef vector <int> vi;
-typedef vector < vector <int> > vvi;
+typedef vector<bool> vb;
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
 
 void dfs(int node, vvi &adj, vb &visited, vi &topo_order, int &iter) {
 	if (visited[node]) return;
@@ -20,7 +20,7 @@ void dfs(int node, vvi &adj, vb &visited, vi &topo_order, int &iter) {
 	topo_order[iter--] = node;
 }
 
-pair <int, int> order(string &a, string &b) {
+pair<int, int> order(string &a, string &b) {
 	int n = a.size();
 	int m = b.size();
 
@@ -28,7 +28,7 @@ pair <int, int> order(string &a, string &b) {
 	while (i < n && i < m && a[i] == b[i]) ++i;
 
 	if (i == n || i == m) return make_pair(-1, -1);
-	return make_pair(a[i] - 'A' , b[i] - 'A');
+	return make_pair(a[i] - 'A', b[i] - 'A');
 }
 
 int main() {
@@ -37,36 +37,36 @@ int main() {
 
 	string s;
 	int N = 0;
-	vector <int> M(26, -1);
-	vector <char> RM;
-	vector <string> words;
+	vector<int> M(26, -1);
+	vector<char> RM;
+	vector<string> words;
 
 	while (cin >> s) {
 		if (s != "#") {
 			words.push_back(s);
 
 			for (int i = 0; i < s.size(); ++i) {
-				if (M[s[i]-'A'] == -1) {
-					M[s[i]-'A'] = N++;
+				if (M[s[i] - 'A'] == -1) {
+					M[s[i] - 'A'] = N++;
 					RM.push_back(s[i]);
 				}
 			}
 		} else {
-			vector < vector <int> > adj(N);
-			set < pair <int, int> > edges;
+			vector<vector<int>> adj(N);
+			set<pair<int, int>> edges;
 
-			for (int i = 0; i < words.size()-1; ++i) {
-				pair <int, int> edge = order(words[i], words[i+1]);
+			for (int i = 0; i < words.size() - 1; ++i) {
+				pair<int, int> edge = order(words[i], words[i + 1]);
 				if (edge.first != -1) edges.insert(edge);
 			}
 
-			set < pair <int, int> >::iterator it;
+			set<pair<int, int>>::iterator it;
 			for (it = edges.begin(); it != edges.end(); ++it) {
 				adj[M[it->first]].push_back(M[it->second]);
 			}
 
-			vector <int> topo_order(N);
-			vector <bool> visited(N);
+			vector<int> topo_order(N);
+			vector<bool> visited(N);
 			int iter = N - 1;
 
 			for (int i = 0; i < N; ++i) {

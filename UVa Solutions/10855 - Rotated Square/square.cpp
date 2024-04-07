@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-typedef vector < vector <char> > matrix;
+typedef vector<vector<char>> matrix;
 
 bool comp(matrix &key, matrix &img, int i, int j) {
 	for (int k = 0; k < key.size(); ++k) {
@@ -24,8 +24,8 @@ int main() {
 	while (cin >> n >> m) {
 		if (n == 0 && m == 0) break;
 
-		matrix img(n, vector <char>(n));
-		vector <matrix> keys(4, matrix(m, vector <char>(m)));
+		matrix img(n, vector<char>(n));
+		vector<matrix> keys(4, matrix(m, vector<char>(m)));
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {

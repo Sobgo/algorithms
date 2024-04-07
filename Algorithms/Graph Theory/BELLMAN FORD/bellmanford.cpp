@@ -6,10 +6,10 @@ struct edge {
 	int from, to, weight;
 };
 
-typedef vector <edge> ve;
-typedef vector <int> vi;
+typedef vector<edge> ve;
+typedef vector<int> vi;
 
-#define INF 2147483647/2
+#define INF 2147483647 / 2
 
 vi bf(int start, ve &edges, int n) {
 	vi dist(n, INF);
@@ -43,7 +43,7 @@ ve read_edges(int m) {
 
 	for (int i = 0; i < m; ++i) {
 		cin >> from >> to >> weight;
-		edges[i] = { from, to, weight };
+		edges[i] = {from, to, weight};
 	}
 
 	return edges;
@@ -57,16 +57,20 @@ int main() {
 	cin >> n >> m;
 
 	ve edges = read_edges(m);
-	int start; cin >> start;
+	int start;
+	cin >> start;
 
 	vi dist = bf(start, edges, n);
 
 	cout << "Distances from " << start << ":\n";
 	for (int i = 0; i < dist.size(); ++i) {
 		cout << i << ": ";
-		if (dist[i] == INF) cout << "INF\n";
-		else if (dist[i] == -INF) cout << "-INF\n";
-		else cout << dist[i] << "\n";
+		if (dist[i] == INF)
+			cout << "INF\n";
+		else if (dist[i] == -INF)
+			cout << "-INF\n";
+		else
+			cout << dist[i] << "\n";
 	}
 
 	return 0;

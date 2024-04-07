@@ -1,6 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 typedef long long int lli;
@@ -10,25 +10,25 @@ lli total = 0;
 
 template <typename RandomIt>
 void mergesort(RandomIt first, RandomIt last) {
-    if (last - first > 1) {
-        RandomIt middle = first + (last - first) / 2;
-       
-        mergesort(first, middle);
-        mergesort(middle, last);
+	if (last - first > 1) {
+		RandomIt middle = first + (last - first) / 2;
 
-        counter = middle - first;
+		mergesort(first, middle);
+		mergesort(middle, last);
+
+		counter = middle - first;
 
 		using value_type = typename iterator_traits<RandomIt>::value_type;
 
-        inplace_merge(first, middle, last, [](const value_type &a, const value_type &b) mutable {
-            if (a < b) {
-                total += counter;
-                return true;
-            }
-            counter--;
-            return false;
-        });
-    }
+		inplace_merge(first, middle, last, [](const value_type &a, const value_type &b) mutable {
+			if (a < b) {
+				total += counter;
+				return true;
+			}
+			counter--;
+			return false;
+		});
+	}
 }
 
 int main() {
@@ -38,7 +38,7 @@ int main() {
 	int n;
 
 	while (cin >> n) {
-		vector <lli> v;
+		vector<lli> v;
 		lli x;
 
 		for (int i = 0; i < n; ++i) {

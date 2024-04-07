@@ -8,9 +8,9 @@ const int MAX = 513;
 
 lli case_num;
 
-vector < vector <lli> > nCr(MAX, vector <lli>(MAX, 0));
-vector < vector <lli> > cache(MAX, vector <lli>(MAX, 0));
-vector < vector <int> > v(MAX, vector <int>(MAX, -1));
+vector<vector<lli>> nCr(MAX, vector<lli>(MAX, 0));
+vector<vector<lli>> cache(MAX, vector<lli>(MAX, 0));
+vector<vector<int>> v(MAX, vector<int>(MAX, -1));
 
 lli dp(int spots, int nodes, int &limit) {
 	if (spots == 0) return nodes == 0;
@@ -20,18 +20,18 @@ lli dp(int spots, int nodes, int &limit) {
 	lli result = 0;
 
 	for (int i = 0; i <= min(limit, nodes); ++i) {
-		result = (result + (nCr[nodes][i] * dp(spots-1, nodes-i, limit)) % MOD) % MOD;
+		result = (result + (nCr[nodes][i] * dp(spots - 1, nodes - i, limit)) % MOD) % MOD;
 	}
 
 	return cache[spots][nodes] = result;
 }
 
-lli get_all_trees(int d, int k, vector <int> &c) {
+lli get_all_trees(int d, int k, vector<int> &c) {
 	lli ans = 1;
 
 	for (int i = 1; i <= d; ++i) {
-		if (c[i-1]*k < c[i]) return 0;
-		ans = (ans * dp(c[i-1], c[i], k)) % MOD;
+		if (c[i - 1] * k < c[i]) return 0;
+		ans = (ans * dp(c[i - 1], c[i], k)) % MOD;
 	}
 
 	return ans;
@@ -47,7 +47,7 @@ int main() {
 		nCr[i][0] = 1;
 
 		for (int j = 1; j <= i; ++j) {
-			nCr[i][j] = (nCr[i-1][j-1] + nCr[i-1][j]) % MOD;
+			nCr[i][j] = (nCr[i - 1][j - 1] + nCr[i - 1][j]) % MOD;
 		}
 	}
 
@@ -57,7 +57,7 @@ int main() {
 	for (case_num = 1; case_num <= t; ++case_num) {
 		cin >> d >> k;
 
-		vector <int> c(d + 1);
+		vector<int> c(d + 1);
 
 		for (int j = 0; j <= d; ++j) {
 			cin >> c[j];
@@ -68,4 +68,3 @@ int main() {
 
 	return 0;
 }
-

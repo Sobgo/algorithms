@@ -3,7 +3,7 @@
 using namespace std;
 
 int M, N, T;
-vector < vector <int> > matrix;
+vector<vector<int>> matrix;
 
 bool transposition = false;
 
@@ -20,7 +20,7 @@ void swap_cols(int i, int j) {
 }
 
 void increment() {
-	for (int i = 0;  i < N; ++i) {
+	for (int i = 0; i < N; ++i) {
 		for (int j = 0; j < N; ++j) {
 			matrix[i][j] = (matrix[i][j] + 1) % 10;
 		}
@@ -28,7 +28,7 @@ void increment() {
 }
 
 void decrement() {
-	for (int i = 0;  i < N; ++i) {
+	for (int i = 0; i < N; ++i) {
 		for (int j = 0; j < N; ++j) {
 			matrix[i][j] = (matrix[i][j] + 9) % 10;
 		}
@@ -36,7 +36,7 @@ void decrement() {
 }
 
 void print() {
-	for (int i = 0;  i < N; ++i) {
+	for (int i = 0; i < N; ++i) {
 		for (int j = 0; j < N; ++j) {
 			if (transposition) {
 				cout << matrix[j][i];
@@ -59,7 +59,7 @@ int main() {
 
 	for (int tc = 1; tc <= T; ++tc) {
 		cin >> N;
-		matrix = vector < vector <int> >(N, vector <int>(N, 0));
+		matrix = vector<vector<int>>(N, vector<int>(N, 0));
 
 		transposition = false;
 
@@ -72,7 +72,7 @@ int main() {
 
 		cin >> M;
 
-		while(M--) {
+		while (M--) {
 			cin >> cmd;
 
 			if (cmd == "row") {

@@ -33,8 +33,10 @@ int main() {
 			g = (i == 0) ? total : gcd(g, total);
 		}
 
-		if (m < g && g > 1) cout << g << "\n";
-		else cout << "impossible\n";
+		if (m < g && g > 1)
+			cout << g << "\n";
+		else
+			cout << "impossible\n";
 	}
 
 	return 0;

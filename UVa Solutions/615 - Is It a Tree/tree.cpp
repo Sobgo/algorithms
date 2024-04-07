@@ -1,22 +1,22 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <map>
-#include <utility>
 #include <cstdlib>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <utility>
+#include <vector>
 using namespace std;
 
-typedef vector <bool> vb;
-typedef vector < vector <int> > vvi;
+typedef vector<bool> vb;
+typedef vector<vector<int>> vvi;
 
-pair <bool, int> DFS(int node, vvi &adj, vb &visited) {
+pair<bool, int> DFS(int node, vvi &adj, vb &visited) {
 	if (visited[node]) return make_pair(false, 0);
 	visited[node] = true;
 
 	int total = 1;
 
 	for (int i = 0; i < adj[node].size(); ++i) {
-		pair <bool, int> res = DFS(adj[node][i], adj, visited);
+		pair<bool, int> res = DFS(adj[node][i], adj, visited);
 		if (!res.first) return make_pair(false, 0);
 		total += res.second;
 	}
@@ -24,9 +24,9 @@ pair <bool, int> DFS(int node, vvi &adj, vb &visited) {
 	return make_pair(true, total);
 }
 
-pair <vvi, vvi> read_adj() {
-	map <int, int> mp;
-	queue < pair <int, int> > q;
+pair<vvi, vvi> read_adj() {
+	map<int, int> mp;
+	queue<pair<int, int>> q;
 	int a, b, iter = 0;
 
 	while (true) {
@@ -102,7 +102,7 @@ int main() {
 		}
 
 		vb visited(res.first.size());
-		pair <bool, int> res2 = DFS(root, res.first, visited);
+		pair<bool, int> res2 = DFS(root, res.first, visited);
 
 		if (res2.first && (res2.second == res.first.size())) {
 			cout << "Case " << iter << " is a tree.\n";
@@ -115,4 +115,3 @@ int main() {
 
 	return 0;
 }
-

@@ -1,23 +1,23 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 int X, Y;
 double W;
 
-bool isFull(vector <double> &v, double w, int total) {
-	double last = w/2;
+bool isFull(vector<double> &v, double w, int total) {
+	double last = w / 2;
 
 	for (int i = 0; i < v.size(); i++) {
-		if (v[i] > last) { 
+		if (v[i] > last) {
 			return false;
 		}
 
 		last = v[i] + w;
 	}
 
-	if (last - w/2 < total) return false;
+	if (last - w / 2 < total) return false;
 	return true;
 }
 
@@ -28,8 +28,8 @@ int main() {
 	while (cin >> X >> Y >> W) {
 		if (X == 0 && Y == 0 && W == 0.0) break;
 
-		vector <double> XP(X);
-		vector <double> YP(Y);
+		vector<double> XP(X);
+		vector<double> YP(Y);
 
 		for (int i = 0; i < X; i++) {
 			cin >> XP[i];

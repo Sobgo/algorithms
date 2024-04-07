@@ -5,6 +5,7 @@ using namespace std;
 
 using pii = pair<int, int>;
 
+// clang-format off
 map<string, pii> tz = {
 	{"UTC", {0, 0}},    {"GMT", {0, 0}},   {"BST", {1, 0}},
 	{"IST", {1, 0}},    {"WET", {0, 0}},   {"WEST", {1, 0}},
@@ -16,7 +17,9 @@ map<string, pii> tz = {
 	{"MDT", {-6, 0}},   {"PST", {-8, 0}},  {"PDT", {-7, 0}},
 	{"HST", {-10, 0}},  {"AKST", {-9, 0}}, {"AKDT", {-8, 0}},
 	{"AEST", {10, 0}},  {"AEDT", {11, 0}}, {"ACST", {9, 30}},
-	{"ACDT", {10, 30}}, {"AWST", {8, 0}}};
+	{"ACDT", {10, 30}}, {"AWST", {8, 0}}
+};
+// clang-format on
 
 pii shift_timezone(pii time, string tz1, string tz2) {
 	time = {time.first - tz[tz1].first, time.second - tz[tz1].second};

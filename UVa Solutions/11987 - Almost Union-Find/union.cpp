@@ -5,9 +5,9 @@ using namespace std;
 #define MAXN 100000
 
 int n, m;
-vector <int> parents (MAXN*2 + 1);
-vector <int> sizes (MAXN*2 + 1);
-vector <int> sums (MAXN*2 + 1);
+vector<int> parents(MAXN * 2 + 1);
+vector<int> sizes(MAXN * 2 + 1);
+vector<int> sums(MAXN * 2 + 1);
 
 void make_set(int val) {
 	int m = val + n;
@@ -24,15 +24,15 @@ int find_set(int val) {
 }
 
 void union_sets(int a, int b) {
-    int a_root = find_set(a);
-    int b_root = find_set(b);
+	int a_root = find_set(a);
+	int b_root = find_set(b);
 
-    if (a_root != b_root) {
+	if (a_root != b_root) {
 		if (sizes[a_root] < sizes[b_root]) swap(a_root, b_root);
 		parents[b_root] = a_root;
 		sizes[a_root] += sizes[b_root];
 		sums[a_root] += sums[b_root];
-    }
+	}
 }
 
 void move_elem(int a, int b) {

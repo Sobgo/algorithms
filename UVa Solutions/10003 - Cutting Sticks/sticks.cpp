@@ -7,15 +7,15 @@ const int MAX_C = 50;
 
 int case_num = 0;
 
-vector < vector <int> > cache(MAX_C + 1, vector <int> (MAX_C + 1, -1));
-vector < vector <int> > v(MAX_C + 1, vector <int> (MAX_C + 1, -1));
+vector<vector<int>> cache(MAX_C + 1, vector<int>(MAX_C + 1, -1));
+vector<vector<int>> v(MAX_C + 1, vector<int>(MAX_C + 1, -1));
 
-int get_cut_cost(int s, int e, int cs, int ce, vector <int> &c) {
+int get_cut_cost(int s, int e, int cs, int ce, vector<int> &c) {
 	if (v[cs][ce] == case_num) return cache[cs][ce];
 
 	v[cs][ce] = case_num;
 	if (cs >= ce) return cache[cs][ce] = 0;
-	
+
 	int min_cost = INF;
 
 	for (int i = cs; i < ce; ++i) {
@@ -37,7 +37,7 @@ int main() {
 		if (l == 0) break;
 
 		cin >> n;
-		vector  <int> c(n);
+		vector<int> c(n);
 
 		for (int i = 0; i < n; ++i) {
 			cin >> c[i];
@@ -49,4 +49,3 @@ int main() {
 
 	return 0;
 }
-

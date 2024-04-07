@@ -1,15 +1,15 @@
 #include <iostream>
-#include <vector>
+#include <map>
 #include <queue>
 #include <stack>
-#include <map>
+#include <vector>
 using namespace std;
 
-typedef vector <bool> vb;
-typedef vector < vector <int> > vvi;
+typedef vector<bool> vb;
+typedef vector<vector<int>> vvi;
 
 int BFS(int start, vvi &adj, vb &visited, int max_depth) {
-	queue < pair <int, int> > q;
+	queue<pair<int, int>> q;
 	int node, depth, total = 1;
 
 	q.push({start, 0});
@@ -32,9 +32,9 @@ int BFS(int start, vvi &adj, vb &visited, int max_depth) {
 	return total;
 }
 
-int read_adj(int n, int m, vvi &adj, map <int, int> &mp, vector <int> &mp2) {
+int read_adj(int n, int m, vvi &adj, map<int, int> &mp, vector<int> &mp2) {
 	int a, b, iter = 0;
-	
+
 	for (int i = 0; i < m; ++i) {
 		cin >> a >> b;
 
@@ -65,15 +65,15 @@ int main() {
 
 	while (true) {
 		n = 30;
-		map <int, int> mp;
-		vector <int> mp2(n);
+		map<int, int> mp;
+		vector<int> mp2(n);
 		vvi adj(n);
 		vb visited;
 
 		cin >> m;
 		if (m == 0) break;
 
-	 	n = read_adj(n, m, adj, mp, mp2);
+		n = read_adj(n, m, adj, mp, mp2);
 		int start, max_depth;
 
 		while (true) {
@@ -87,7 +87,7 @@ int main() {
 				cout << n << " nodes not reachable from node " << start << " with TTL = " << max_depth << ".\n";
 				continue;
 			}
-			
+
 			int total = BFS(mp[start], adj, visited, max_depth);
 
 			cout << "Case " << iter++ << ": ";

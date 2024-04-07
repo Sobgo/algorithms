@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <memory>
+#include <vector>
 using namespace std;
 
 struct Point {
@@ -8,8 +8,8 @@ struct Point {
 };
 
 class Figure {
-	public:
-		virtual bool contains(Point p) = 0;
+  public:
+	virtual bool contains(Point p) = 0;
 };
 
 class Rect : public Figure {
@@ -24,7 +24,7 @@ class Rect : public Figure {
 
 	bool contains(Point p) {
 		return p.x > top_left.x && p.x < bot_right.x &&
-			   p.y < top_left.y && p.y > bot_right.y;
+		       p.y < top_left.y && p.y > bot_right.y;
 	}
 };
 
@@ -41,7 +41,8 @@ class Circle : public Figure {
 
 	bool contains(Point p) {
 		return (p.x - center.x) * (p.x - center.x) +
-			   (p.y - center.y) * (p.y - center.y) < radius * radius;
+		           (p.y - center.y) * (p.y - center.y) <
+		       radius * radius;
 	}
 };
 
@@ -73,20 +74,20 @@ int main() {
 	double a, b, c, d, e, f;
 	int iter = 0;
 
-	vector < unique_ptr <Figure> > figures;
+	vector<unique_ptr<Figure>> figures;
 
 	while (cin >> ch) {
 		if (ch == '*') break;
 
 		if (ch == 'r') {
 			cin >> a >> b >> c >> d;
-			figures.push_back(unique_ptr <Figure> (new Rect(a, b, c, d)));
+			figures.push_back(unique_ptr<Figure>(new Rect(a, b, c, d)));
 		} else if (ch == 'c') {
 			cin >> a >> b >> c;
-			figures.push_back(unique_ptr <Figure> (new Circle(a, b, c)));
+			figures.push_back(unique_ptr<Figure>(new Circle(a, b, c)));
 		} else if (ch == 't') {
 			cin >> a >> b >> c >> d >> e >> f;
-			figures.push_back(unique_ptr <Figure> (new Triangle(a, b, c, d, e, f)));
+			figures.push_back(unique_ptr<Figure>(new Triangle(a, b, c, d, e, f)));
 		}
 	}
 

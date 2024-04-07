@@ -14,8 +14,8 @@ int main() {
 	while (cin >> N >> M) {
 		if (N == 0 && M == 0) break;
 
-		vector < pair <int, int> > con(N);
-		vector < pair <int, int> > inter(M);
+		vector<pair<int, int>> con(N);
+		vector<pair<int, int>> inter(M);
 
 		int a, b;
 		for (int i = 0; i < N; ++i) {
@@ -25,7 +25,7 @@ int main() {
 
 		for (int i = 0; i < M; ++i) {
 			cin >> inter[i].s >> inter[i].e;
-			inter[i].e= inter[i].s + inter[i].e;
+			inter[i].e = inter[i].s + inter[i].e;
 		}
 
 		for (int i = 0; i < M; ++i) {

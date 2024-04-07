@@ -8,29 +8,31 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	lli n; cin >> n;
+	lli n;
+	cin >> n;
 
 	for (lli i = 0; i < n; ++i) {
-		string s; cin >> s;
+		string s;
+		cin >> s;
 
-		vector <string> v(s.size()*2 + 2, string(s.size() + 2, ' '));
+		vector<string> v(s.size() * 2 + 2, string(s.size() + 2, ' '));
 
 		int y = s.size() + 1;
-		
+
 		int max_y = y;
 		int min_y = y;
 
 		for (int j = 0; j < s.size(); ++j) {
 			if (s[j] == 'R') {
-				v[y][j+1] = '/';
+				v[y][j + 1] = '/';
 				y--;
 				if (y < min_y) min_y = y;
 			} else if (s[j] == 'F') {
 				y++;
-				v[y][j+1] = '\\';
+				v[y][j + 1] = '\\';
 				if (y > max_y) max_y = y;
 			} else {
-				v[y][j+1] = '_';
+				v[y][j + 1] = '_';
 			}
 		}
 
@@ -43,7 +45,7 @@ int main() {
 			}
 		}
 
-		cout << "Case #" << i+1 << ":\n";
+		cout << "Case #" << i + 1 << ":\n";
 
 		if (v[min_y].size() != 0) cout << "|" << v[min_y] << "\n";
 

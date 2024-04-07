@@ -1,20 +1,20 @@
+#include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <cstdlib>
 using namespace std;
 
-typedef vector < vector <int> > matrix;
+typedef vector<vector<int>> matrix;
 
 int N;
 matrix A, B;
 
-vector <int> random_vec(int n) {
-	vector <int> v(n);
+vector<int> random_vec(int n) {
+	vector<int> v(n);
 
 	for (int i = 0; i < n; ++i) {
 		v[i] = rand() % 1000;
 	}
-	
+
 	return v;
 }
 
@@ -22,13 +22,13 @@ bool isPow() {
 	// if A * (A * v) != B * v
 	// then A^2 != B
 
-	// after 50 tries for random vector v 
+	// after 50 tries for random vector v
 	// we can assume with high probability that A^2 == B
 
 	const int tries = 50;
 
-	for (int i = 0; i < tries; ++i) {	
-		vector <int> v, Av(N), Bv(N), AAv(N);
+	for (int i = 0; i < tries; ++i) {
+		vector<int> v, Av(N), Bv(N), AAv(N);
 		v = random_vec(N);
 
 		// A * v; B * v;
@@ -65,8 +65,8 @@ int main() {
 
 	while (cin >> N) {
 		if (N == 0) break;
-		A = matrix(N, vector <int>(N));
-		B = matrix(N, vector <int>(N));
+		A = matrix(N, vector<int>(N));
+		B = matrix(N, vector<int>(N));
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {

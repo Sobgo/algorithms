@@ -1,15 +1,15 @@
 #include <iostream>
-#include <vector>
-#include <utility>
-#include <stack>
 #include <map>
+#include <stack>
+#include <utility>
+#include <vector>
 using namespace std;
 
-typedef vector <bool> vb;
-typedef vector <int> vi;
-typedef vector <vi> vvi;
+typedef vector<bool> vb;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-void dfs(int node, int &idx, vvi &adj, vi &ids, vi &low, stack <int> &s, vb &on_stack) {
+void dfs(int node, int &idx, vvi &adj, vi &ids, vi &low, stack<int> &s, vb &on_stack) {
 	ids[node] = low[node] = idx++;
 	s.push(node);
 	on_stack[node] = true;
@@ -33,8 +33,8 @@ void dfs(int node, int &idx, vvi &adj, vi &ids, vi &low, stack <int> &s, vb &on_
 	}
 }
 
-vector <vector <int> > find_scc(vvi &adj) {
-	stack <int> s;
+vector<vector<int>> find_scc(vvi &adj) {
+	stack<int> s;
 	vb on_stack(adj.size());
 	vi ids(adj.size(), -1), low(adj.size(), -1);
 	int idx = 0;
@@ -44,7 +44,7 @@ vector <vector <int> > find_scc(vvi &adj) {
 		dfs(i, idx, adj, ids, low, s, on_stack);
 	}
 
-	vector < vector <int> > components(adj.size());
+	vector<vector<int>> components(adj.size());
 
 	for (int i = 0; i < adj.size(); ++i) {
 		components[low[i]].push_back(i);
@@ -58,7 +58,7 @@ int main() {
 	cin.tie(0);
 
 	int n, m, t = 1;
-	while(cin >> n >> m) {
+	while (cin >> n >> m) {
 		if (n == 0 && m == 0) break;
 
 		if (t != 1) cout << '\n';
@@ -68,11 +68,11 @@ int main() {
 			continue;
 		}
 
-		map <string, int> M;
-		vector <string> RM;
+		map<string, int> M;
+		vector<string> RM;
 
 		string s1, s2;
-		vector < vector <int> > adj(n);
+		vector<vector<int>> adj(n);
 
 		for (int i = 0; i < m; ++i) {
 			cin >> s1 >> s2;
@@ -90,14 +90,14 @@ int main() {
 			adj[M[s1]].push_back(M[s2]);
 		}
 
-		vector < vector <int> > components = find_scc(adj);
+		vector<vector<int>> components = find_scc(adj);
 
 		cout << "Calling circles for data set " << t++ << ":\n";
 
 		for (int i = 0; i < components.size(); ++i) {
 			for (int j = 0; j < components[i].size(); ++j) {
 				cout << RM[components[i][j]];
-				if (j != components[i].size()-1) cout << ", ";
+				if (j != components[i].size() - 1) cout << ", ";
 			}
 			if (components[i].size() != 0) cout << '\n';
 		}

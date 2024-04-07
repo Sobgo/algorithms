@@ -3,8 +3,8 @@
 using namespace std;
 
 int N;
-vector <int> parents;
-vector <int> sizes;
+vector<int> parents;
+vector<int> sizes;
 
 void make_set(int val) {
 	parents[val] = val;
@@ -49,8 +49,7 @@ int main() {
 		if (c == 'u') {
 			cin >> val1 >> val2;
 			union_set(val1, val2);
-		}
-		else if (c == 'f') {
+		} else if (c == 'f') {
 			cin >> val1;
 			cout << find_set(val1) << '\n';
 		}

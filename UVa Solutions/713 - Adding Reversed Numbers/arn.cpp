@@ -6,8 +6,9 @@ void print(string s) {
 
 	while (iter < s.size() && s[iter] == '0') ++iter;
 
-	if (iter == s.size()) cout << 0;
-	else {
+	if (iter == s.size()) {
+		cout << 0;
+	} else {
 		for (int i = iter; i < s.size(); ++i) cout << s[i];
 	}
 }

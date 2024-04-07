@@ -1,31 +1,31 @@
 #include <iostream>
-#include <vector>
 #include <tuple>
+#include <vector>
 using namespace std;
 
 #define INF (int)1e9
 
 int H, W, G, E;
-vector < vector <int> > grid;
-vector < tuple <int, int, int> > holes;
-vector < vector <int> > dist;
+vector<vector<int>> grid;
+vector<tuple<int, int, int>> holes;
+vector<vector<int>> dist;
 
 void bellman_ford(int sx, int sy) {
 	int dest_x, dest_y, t;
-	vector <int> dx = { 0, 0, 1, -1 };
-	vector <int> dy = { 1, -1, 0, 0 };
+	vector<int> dx = {0, 0, 1, -1};
+	vector<int> dy = {1, -1, 0, 0};
 
 	dist[sx][sy] = 0;
 
 	for (int ii = 1; ii <= H; ++ii) {
 		for (int jj = 1; jj <= W; ++jj) {
 			for (int i = 1; i <= H; ++i) {
-				for (int j = 1; j <= W; ++j) {	
+				for (int j = 1; j <= W; ++j) {
 					if (dist[i][j] == INF) continue;
 					if (i == H && j == W) continue;
 
 					if (grid[i][j] > 0) {
-						tie(dest_x, dest_y, t) = holes[grid[i][j]];	
+						tie(dest_x, dest_y, t) = holes[grid[i][j]];
 						if (dist[i][j] + t < dist[dest_x][dest_y]) {
 							dist[dest_x][dest_y] = dist[i][j] + t;
 						}
@@ -47,12 +47,12 @@ void bellman_ford(int sx, int sy) {
 	}
 
 	for (int i = 1; i <= H; ++i) {
-		for (int j = 1; j <= W; ++j) {	
+		for (int j = 1; j <= W; ++j) {
 			if (dist[i][j] == INF) continue;
 			if (i == H && j == W) continue;
-			
+
 			if (grid[i][j] > 0) {
-				tie(dest_x, dest_y, t) = holes[grid[i][j]];	
+				tie(dest_x, dest_y, t) = holes[grid[i][j]];
 				if (dist[i][j] + t < dist[dest_x][dest_y]) {
 					dist[H][W] = -INF;
 					return;
@@ -81,16 +81,16 @@ int main() {
 	while (cin >> H >> W) {
 		if (H == 0 && W == 0) break;
 
-		grid = vector < vector <int> >(H+2, vector <int>(W+2, 0));
+		grid = vector<vector<int>>(H + 2, vector<int>(W + 2, 0));
 
-		for (int i = 0; i <= H+1; ++i) {
+		for (int i = 0; i <= H + 1; ++i) {
 			grid[i][0] = -1;
-			grid[i][W+1] = -1;
+			grid[i][W + 1] = -1;
 		}
 
-		for (int i = 0; i <= W+1; ++i) {
+		for (int i = 0; i <= W + 1; ++i) {
 			grid[0][i] = -1;
-			grid[H+1][i] = -1;
+			grid[H + 1][i] = -1;
 		}
 
 		cin >> G;
@@ -98,21 +98,21 @@ int main() {
 		int x, y;
 		for (int i = 0; i < G; ++i) {
 			cin >> x >> y;
-			grid[x+1][y+1] = -1;
+			grid[x + 1][y + 1] = -1;
 		}
 
 		cin >> E;
 
-		holes = vector < tuple <int, int, int> >(E+1);
+		holes = vector<tuple<int, int, int>>(E + 1);
 
 		int to_x, to_y, t;
 		for (int i = 1; i <= E; ++i) {
 			cin >> x >> y >> to_x >> to_y >> t;
-			holes[i] = { to_x+1, to_y+1, t };
-			grid[x+1][y+1] = i;
+			holes[i] = {to_x + 1, to_y + 1, t};
+			grid[x + 1][y + 1] = i;
 		}
 
-		dist = vector < vector <int> >(H+2, vector <int>(W+2, INF));
+		dist = vector<vector<int>>(H + 2, vector<int>(W + 2, INF));
 
 		bellman_ford(1, 1);
 

@@ -4,7 +4,7 @@ using namespace std;
 
 typedef long long int lli;
 
-vector < vector <lli> > cache(26, vector <lli> (26, -1));
+vector<vector<lli>> cache(26, vector<lli>(26, -1));
 
 lli solve_rect(int n, int m) {
 	if (cache[n][m] != -1) return cache[n][m];
@@ -30,10 +30,12 @@ int main() {
 		cache[i][1] = 1;
 	}
 
-	int t; cin >> t;
+	int t;
+	cin >> t;
 
 	for (int i = 0; i < t; ++i) {
-		int n, m; cin >> n >> m;
+		int n, m;
+		cin >> n >> m;
 		cout << solve_rect(n, m) << "\n";
 	}
 

@@ -1,12 +1,12 @@
-#include <iostream>
-#include <vector>
-#include <tuple>
 #include <cmath>
+#include <iostream>
+#include <tuple>
+#include <vector>
 using namespace std;
 
-typedef vector < vector <int> > vvi;
-typedef vector <bool> vb;
-typedef pair <double , double> pdd;
+typedef vector<vector<int>> vvi;
+typedef vector<bool> vb;
+typedef pair<double, double> pdd;
 
 double get_dis(pdd &a, pdd &b) {
 	return sqrt(pow(a.first - b.first, 2) + pow(a.second - b.second, 2));
@@ -35,22 +35,20 @@ int main() {
 		cin >> n;
 		if (n < 0) return 0;
 
-		vector <pdd> cords(n);
-		vector <double> rad(n);
+		vector<pdd> cords(n);
+		vector<double> rad(n);
 
 		for (int i = 0; i < n; ++i) {
 			cin >> cords[i].first >> cords[i].second >> rad[i];
 		}
 
 		vvi adj(n);
-		vector <bool> visited(n);
+		vector<bool> visited(n);
 
 		for (int i = 0; i < n; ++i) {
 			for (int j = i + 1; j < n; ++j) {
 				if (
-					abs(rad[i] - rad[j]) < get_dis(cords[i], cords[j])
-					&& get_dis(cords[i], cords[j]) < rad[i] + rad[j]
-				) {
+					abs(rad[i] - rad[j]) < get_dis(cords[i], cords[j]) && get_dis(cords[i], cords[j]) < rad[i] + rad[j]) {
 					adj[i].push_back(j);
 					adj[j].push_back(i);
 				}

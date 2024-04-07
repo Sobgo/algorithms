@@ -1,22 +1,22 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <tuple>
+#include <vector>
 using namespace std;
 
-typedef pair <int, int> pi;
-typedef tuple <int, int, int> ti;
+typedef pair<int, int> pi;
+typedef tuple<int, int, int> ti;
 
-typedef vector <pi> vp;
-typedef vector <vp> vvp;
-typedef priority_queue <ti, vector <ti>, greater <ti> > pq;
+typedef vector<pi> vp;
+typedef vector<vp> vvp;
+typedef priority_queue<ti, vector<ti>, greater<ti>> pq;
 
-vector <int> visited;
+vector<int> visited;
 int N, R, Q;
 
 int bfs(vvp &adj, int a, int b, int idx) {
-	queue <int> q;
-	vector <pi> parents(N, {-1, 0});
+	queue<int> q;
+	vector<pi> parents(N, {-1, 0});
 
 	q.push(a);
 	visited[a] = idx;
@@ -61,7 +61,7 @@ vvp find_mst(vvp &adj) {
 
 	int w, from, to;
 
-	while(!q.empty()) {
+	while (!q.empty()) {
 		w = get<0>(q.top());
 		from = get<1>(q.top());
 		to = get<2>(q.top());
@@ -82,7 +82,8 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int t; cin >> t;
+	int t;
+	cin >> t;
 
 	for (int tc = 1; tc <= t; ++tc) {
 		cout << "Case " << tc << "\n";
@@ -94,19 +95,21 @@ int main() {
 
 		for (int i = 0; i < R; i++) {
 			cin >> a >> b >> l;
-			a--; b--;
+			a--;
+			b--;
 			adj[a].push_back({l, b});
 			adj[b].push_back({l, a});
 		}
 
-		visited = vector <int> (N, -1);
+		visited = vector<int>(N, -1);
 
 		vvp res = find_mst(adj);
 
 		cin >> Q;
 		for (int i = 1; i <= Q; ++i) {
 			cin >> a >> b;
-			a--; b--;
+			a--;
+			b--;
 			cout << bfs(res, a, b, i) << "\n";
 		}
 

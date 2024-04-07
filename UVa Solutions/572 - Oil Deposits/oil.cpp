@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 
-typedef vector <bool> vb;
-typedef vector < vector <char> > vvc;
+typedef vector<bool> vb;
+typedef vector<vector<char>> vvc;
 
 void DFS(int i, int j, vvc &adj) {
 	if (adj[i][j] == '*') return;
@@ -17,7 +17,7 @@ void DFS(int i, int j, vvc &adj) {
 }
 
 vvc read_adj(int n, int m) {
-	vvc adj(n+2, vector <char> (m+2, '*'));
+	vvc adj(n + 2, vector<char>(m + 2, '*'));
 
 	for (int i = 1; i <= n; ++i) {
 		for (int j = 1; j <= m; j++) {
@@ -33,7 +33,7 @@ int main() {
 	cin.tie(0);
 
 	int n, m, t = 1;
-	while(cin >> n >> m) {
+	while (cin >> n >> m) {
 		if (n == 0 && m == 0) break;
 
 		vvc adj = read_adj(n, m);

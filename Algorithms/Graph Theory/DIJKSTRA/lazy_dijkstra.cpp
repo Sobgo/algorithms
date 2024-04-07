@@ -1,13 +1,13 @@
-#include <iostream>
-#include <vector>
-#include <queue>
 #include <algorithm>
+#include <iostream>
+#include <queue>
+#include <vector>
 using namespace std;
 
-typedef pair <int, int> pi;
-typedef vector <int> vi;
-typedef vector <pi> vp;
-typedef vector <vp> vvp;
+typedef pair<int, int> pi;
+typedef vector<int> vi;
+typedef vector<pi> vp;
+typedef vector<vp> vvp;
 
 #define to first
 #define w second
@@ -15,12 +15,12 @@ typedef vector <vp> vvp;
 #define INF 2147483647
 
 int N, M;
-vvp ADJ; 
+vvp ADJ;
 
-pair <vi, vi> dijkstra(int start) {
-	priority_queue < pi, vp, greater<pi> > pq;
-	vector <int> dist(N, INF);
-	vector <int> parent(N, -1);
+pair<vi, vi> dijkstra(int start) {
+	priority_queue<pi, vp, greater<pi>> pq;
+	vector<int> dist(N, INF);
+	vector<int> parent(N, -1);
 
 	dist[start] = 0;
 	pq.push({0, start});
@@ -34,7 +34,7 @@ pair <vi, vi> dijkstra(int start) {
 		if (dist[node] < weight) continue;
 
 		// update distances to all nodes that this path improves distance to
-		for (pi next : ADJ[node]) {	
+		for (pi next : ADJ[node]) {
 			if (dist[next.to] > dist[node] + next.w) {
 				dist[next.to] = dist[node] + next.w;
 				pq.push({dist[next.to], next.to});
@@ -46,13 +46,13 @@ pair <vi, vi> dijkstra(int start) {
 	return {dist, parent};
 }
 
-vector <int> path(int start, int end) {
-	pair <vi, vi> res = dijkstra(start);
+vector<int> path(int start, int end) {
+	pair<vi, vi> res = dijkstra(start);
 	vi dist = res.first;
 	vi parent = res.second;
 
 	// no path
-	if(dist[end] == INF) return vector <int>();
+	if (dist[end] == INF) return vector<int>();
 
 	// reconstruct path from end to start
 	vi path;
@@ -78,12 +78,12 @@ int main() {
 	for (int i = 0; i < M; ++i) {
 		cin >> a >> b >> weight;
 		ADJ[a].push_back({b, weight});
-		//ADJ[b].push_back({a, weight});
+		// ADJ[b].push_back({a, weight});
 	}
 
 	int start, end;
 	cin >> start >> end;
-	
+
 	vi res = path(start, end);
 
 	if (res.empty()) {

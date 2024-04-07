@@ -1,9 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <unordered_map>
 #include <algorithm>
-#include <string>
+#include <iostream>
 #include <queue>
+#include <string>
+#include <unordered_map>
+#include <vector>
 using namespace std;
 
 int main() {
@@ -13,10 +13,10 @@ int main() {
 	int n, m, t = 1;
 
 	while (cin >> n) {
-		unordered_map <string, int> mp;
-		vector <string> rm(n);
+		unordered_map<string, int> mp;
+		vector<string> rm(n);
 		string s;
-	
+
 		for (int i = 0; i < n; ++i) {
 			cin >> s;
 			rm[i] = s;
@@ -26,8 +26,8 @@ int main() {
 		cin >> m;
 
 		string a, b;
-		vector < vector <int> > adj(n);
-		vector <int> indeg(n, 0);
+		vector<vector<int>> adj(n);
+		vector<int> indeg(n, 0);
 
 		for (int i = 0; i < m; ++i) {
 			cin >> a >> b;
@@ -52,6 +52,6 @@ int main() {
 		}
 		cout << ".\n\n";
 	}
-	
+
 	return 0;
 }

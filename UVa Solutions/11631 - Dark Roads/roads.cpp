@@ -1,19 +1,19 @@
 #include <iostream>
-#include <vector>
-#include <tuple>
 #include <queue>
+#include <tuple>
+#include <vector>
 using namespace std;
 
 #define to first
 #define weight second
 
-typedef tuple <int, int, int> edge;
-typedef priority_queue <edge, vector <edge>, greater <edge> > pqe;
+typedef tuple<int, int, int> edge;
+typedef priority_queue<edge, vector<edge>, greater<edge>> pqe;
 
 int N, M;
-vector < vector < pair <int, int> > > ADJ;
+vector<vector<pair<int, int>>> ADJ;
 
-void add_edges(int node, vector <bool> &visited, pqe &pq) {
+void add_edges(int node, vector<bool> &visited, pqe &pq) {
 	visited[node] = true;
 
 	for (auto edge : ADJ[node]) {
@@ -23,11 +23,11 @@ void add_edges(int node, vector <bool> &visited, pqe &pq) {
 	}
 }
 
-vector <edge> find_mst() {
-	pqe pq; 
-	vector <edge> edges;
-	vector <bool> visited(N);
-	
+vector<edge> find_mst() {
+	pqe pq;
+	vector<edge> edges;
+	vector<bool> visited(N);
+
 	add_edges(0, visited, pq);
 
 	const int mst_size = N - 1;
@@ -42,7 +42,7 @@ vector <edge> find_mst() {
 		add_edges(get<2>(e), visited, pq);
 	}
 
-	if (edges.size() < mst_size) return vector <edge>();
+	if (edges.size() < mst_size) return vector<edge>();
 	return edges;
 }
 
@@ -50,10 +50,10 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	while(cin >> N >> M) {
+	while (cin >> N >> M) {
 		if (N == 0 && M == 0) break;
-	
-		ADJ = vector < vector < pair <int, int> > >(N);
+
+		ADJ = vector<vector<pair<int, int>>>(N);
 
 		int total_w = 0;
 
@@ -66,7 +66,7 @@ int main() {
 			total_w += w;
 		}
 
-		vector <edge> mst = find_mst();
+		vector<edge> mst = find_mst();
 
 		int mst_w = 0;
 

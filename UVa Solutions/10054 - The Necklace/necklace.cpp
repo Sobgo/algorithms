@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-typedef vector <int> vi;
-typedef vector <vi> vvi;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
 void DFS(int node, vvi &adj, vi &path) {
 
 	for (int to = 0; to < adj.size(); ++to) {
-		while (adj[node][to]) {	
+		while (adj[node][to]) {
 			adj[node][to]--;
 			adj[to][node]--;
 
@@ -47,7 +47,9 @@ vvi read_adj(int n, int m) {
 	vvi adj(n, vi(n, 0));
 
 	for (int i = 0; i < m; ++i) {
-		cin >> a >> b; a--; b--;
+		cin >> a >> b;
+		a--;
+		b--;
 		adj[a][b]++;
 		adj[b][a]++;
 	}
@@ -59,10 +61,12 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int t; cin >> t;
+	int t;
+	cin >> t;
 
 	for (int i = 1; i <= t; ++i) {
-		int n; cin >> n;
+		int n;
+		cin >> n;
 
 		vvi adj = read_adj(50, n);
 		vi path = eulerian_cycle(n, adj);

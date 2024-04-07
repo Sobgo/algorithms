@@ -3,25 +3,29 @@
 
 typedef long long int lli;
 
+// clang-format off
 lli gcd (lli a, lli b) { lli t; while (b != 0) { t = b; b = a % b; a = t; } return a; }
 lli lcm (lli a, lli b) { return a / gcd(a, b) * b; }
 lli abs (lli a) { return a < 0 ? -a : a; }
+// clang-format on
 
 class Frac {
-	public:
+  public:
 	lli num, den;
 	Frac(lli num, lli den = 1);
 	void simplify();
 
-	Frac operator+ (Frac f);
-	Frac operator- (Frac f);
-	Frac operator* (Frac f);
-	Frac operator/ (Frac f);
+	Frac operator+(Frac f);
+	Frac operator-(Frac f);
+	Frac operator*(Frac f);
+	Frac operator/(Frac f);
 };
 
-std::ostream& operator<<(std::ostream& out, const Frac& f) {
-	if (f.den == 1) out << f.num;
-	else out << f.num << "|" << f.den;
+std::ostream &operator<<(std::ostream &out, const Frac &f) {
+	if (f.den == 1)
+		out << f.num;
+	else
+		out << f.num << "|" << f.den;
 	return out;
 }
 
@@ -37,7 +41,7 @@ int main() {
 		try {
 			Frac res = eval(s);
 			std::cout << res << "\n";
-		} catch (const char* msg) {
+		} catch (const char *msg) {
 			std::cout << "INVALID\n";
 		}
 	}
@@ -47,8 +51,8 @@ int main() {
 
 // ------ Parser Implementation -------
 
-bool isop (char &c) {
-    return c == '+' || c == '-' || c == '*' || c == '/' || c == '|';
+bool isop(char &c) {
+	return c == '+' || c == '-' || c == '*' || c == '/' || c == '|';
 }
 
 lli priority(char &op) {
@@ -58,9 +62,11 @@ lli priority(char &op) {
 	return -1;
 }
 
-void process_op(std::stack <Frac> &nums, char &op) {
-	Frac a = nums.top(); nums.pop();
-	Frac b = nums.top(); nums.pop();
+void process_op(std::stack<Frac> &nums, char &op) {
+	Frac a = nums.top();
+	nums.pop();
+	Frac b = nums.top();
+	nums.pop();
 
 	if (op == '+') nums.push(b + a);
 	if (op == '-') nums.push(b - a);
@@ -69,8 +75,8 @@ void process_op(std::stack <Frac> &nums, char &op) {
 }
 
 Frac eval(std::string s) {
-	std::stack <Frac> nums;
-	std::stack <char> ops;
+	std::stack<Frac> nums;
+	std::stack<char> ops;
 
 	lli num = 0;
 	bool add = false;
@@ -87,7 +93,8 @@ Frac eval(std::string s) {
 				add = false;
 				num = 0;
 			}
-		} else continue;
+		} else
+			continue;
 
 		if (token == '(') {
 			ops.push('(');
@@ -153,20 +160,20 @@ Frac::Frac(lli num, lli den) {
 	std::cout << "";
 }
 
-Frac Frac::operator+ (Frac f) {
+Frac Frac::operator+(Frac f) {
 	lli l = lcm(den, f.den);
 	return Frac(num * (l / den) + f.num * (l / f.den), l);
 }
 
-Frac Frac::operator- (Frac f) {
+Frac Frac::operator-(Frac f) {
 	lli l = lcm(den, f.den);
 	return Frac(num * (l / den) - f.num * (l / f.den), l);
 }
 
-Frac Frac::operator* (Frac f) {
+Frac Frac::operator*(Frac f) {
 	return Frac(num * f.num, den * f.den);
 }
 
-Frac Frac::operator/ (Frac f) {
+Frac Frac::operator/(Frac f) {
 	return Frac(num * f.den, den * f.num);
 }

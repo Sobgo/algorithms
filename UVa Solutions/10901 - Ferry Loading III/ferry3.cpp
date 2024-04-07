@@ -1,5 +1,5 @@
-#include <queue>
 #include <iostream>
+#include <queue>
 #include <vector>
 using namespace std;
 
@@ -7,22 +7,25 @@ void ferry() {
 	int n, t, m;
 	cin >> n >> t >> m;
 
-	vector < queue <int> > sides(2);
-	vector <int> out_time(m);
+	vector<queue<int>> sides(2);
+	vector<int> out_time(m);
 
 	for (int i = 0; i < m; ++i) {
-		int arrival; string side;
+		int arrival;
+		string side;
 		cin >> arrival >> side;
 
-		if (side == "left") sides[0].push(i);
-		else sides[1].push(i);
+		if (side == "left")
+			sides[0].push(i);
+		else
+			sides[1].push(i);
 
 		out_time[i] = arrival;
 	}
 
 	int time = 0, cap = 0, side = 0;
 
-	while (!sides[0].empty()|| !sides[1].empty()) {
+	while (!sides[0].empty() || !sides[1].empty()) {
 
 		if (sides[0].empty()) {
 			time = max(time, out_time[sides[1].front()]);
@@ -52,12 +55,14 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int c; cin >> c;
+	int c;
+	cin >> c;
 
 	for (int i = 1; i < c; ++i) {
-		ferry(); cout << "\n";
+		ferry();
+		cout << "\n";
 	}
-	
+
 	if (c > 0) ferry();
 
 	return 0;

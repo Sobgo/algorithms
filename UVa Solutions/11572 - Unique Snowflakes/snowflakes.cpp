@@ -1,18 +1,20 @@
 #include <iostream>
-#include <vector>
 #include <map>
+#include <vector>
 using namespace std;
 
 int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int t; cin >>t;
+	int t;
+	cin >> t;
 
-	while(t-->0) {
-		int n; cin >> n;
-		vector <int> snowflakes(n);
-		map <int, int> present;
+	while (t-- > 0) {
+		int n;
+		cin >> n;
+		vector<int> snowflakes(n);
+		map<int, int> present;
 
 		for (int i = 0; i < n; ++i) {
 			cin >> snowflakes[i];
@@ -41,7 +43,6 @@ int main() {
 
 		cout << max_len << "\n";
 	}
-
 
 	return 0;
 }

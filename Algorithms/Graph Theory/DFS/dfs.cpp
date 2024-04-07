@@ -3,9 +3,9 @@
 using namespace std;
 
 int N, M;
-vector < vector <int> > ADJ;
+vector<vector<int>> ADJ;
 
-void DFS(int node, vector <bool> &visited) {
+void DFS(int node, vector<bool> &visited) {
 	if (visited[node]) return;
 	visited[node] = true;
 
@@ -37,7 +37,7 @@ int main() {
 	cin >> start;
 
 	cout << "DFS traversal: ";
-	vector <bool> visited(N, false);
+	vector<bool> visited(N, false);
 	DFS(start, visited);
 
 	return 0;

@@ -1,6 +1,6 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <cmath>
 using namespace std;
 
 void print(int l, int r, int m) {
@@ -12,7 +12,7 @@ void print(int l, int r, int m) {
 	if (parent < l) {
 		// right tree is not full => left tree is empty
 		cout << " " << l;
-		print(l+1, r, m - 1);
+		print(l + 1, r, m - 1);
 	} else {
 		// divide on parent and process left subtree then right
 		cout << " " << parent;
@@ -30,14 +30,14 @@ int main() {
 	while (cin >> n >> m) {
 		if (n == 0 && m == 0) break;
 
-		cout << "Case " << t++ <<  ":";
+		cout << "Case " << t++ << ":";
 
 		if (pow(2, m) - 1 < n) {
 			cout << " Impossible.\n";
 			continue;
 		}
 
-		print(1, n, m-1);
+		print(1, n, m - 1);
 		cout << '\n';
 	}
 
